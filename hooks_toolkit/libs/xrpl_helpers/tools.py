@@ -11,36 +11,84 @@ from xrpl.models.transactions import Payment, TrustSet, AccountSet, AccountSetFl
 from xrpl.utils import str_to_hex, xrp_to_drops
 from hooks_toolkit.libs.xrpl_helpers.transaction import app_transaction
 
+from hooks_toolkit.libs.xrpl_helpers.constants import (
+    NOT_ACTIVE_WALLET,
+    MASTER_ACCOUNT_WALLET,
+    GW_ACCOUNT_WALLET,
+    ALICE_ACCOUNT_WALLET,
+    BOB_ACCOUNT_WALLET,
+    CAROL_ACCOUNT_WALLET,
+    DAVE_ACCOUNT_WALLET,
+    ELSA_ACCOUNT_WALLET,
+    FRANK_ACCOUNT_WALLET,
+    GRACE_ACCOUNT_WALLET,
+    HEIDI_ACCOUNT_WALLET,
+    IVAN_ACCOUNT_WALLET,
+    JUDY_ACCOUNT_WALLET,
+    HOOK1_ACCOUNT_WALLET,
+    HOOK2_ACCOUNT_WALLET,
+    HOOK3_ACCOUNT_WALLET,
+    HOOK4_ACCOUNT_WALLET,
+    HOOK5_ACCOUNT_WALLET,
+)
+
 LEDGER_ACCEPT_REQUEST = {"command": "ledger_accept"}
 
 
 class Account:
     def __init__(self, name: str = None, seed: str = None):
-        print(name)
         self.name = name
         if name == "gw":
-            self.wallet = Wallet("safmpBLsy2paxybRMpvXqFqSrV5HG", 0)
+            self.wallet = GW_ACCOUNT_WALLET
             self.account = self.wallet.classic_address
         if name == "notactivated":
-            self.wallet = Wallet("snqPCkCnfAbK4p981HZZGMj8SnhZ7", 0)
+            self.wallet = NOT_ACTIVE_WALLET
             self.account = self.wallet.classic_address
         if name == "alice":
-            self.wallet = Wallet("ssbTMHrmEJP7QEQjWJH3a72LQipBM", 0)
+            self.wallet = ALICE_ACCOUNT_WALLET
             self.account = self.wallet.classic_address
         if name == "bob":
-            self.wallet = Wallet("spkcsko6Ag3RbCSVXV2FJ8Pd4Zac1", 0)
+            self.wallet = BOB_ACCOUNT_WALLET
             self.account = self.wallet.classic_address
         if name == "carol":
-            self.wallet = Wallet("snzb83cV8zpLPTE4nQamoLP9pbhB7", 0)
+            self.wallet = CAROL_ACCOUNT_WALLET
             self.account = self.wallet.classic_address
         if name == "dave":
-            self.wallet = Wallet("sh2Q7wDfjdvyVaVHEE8JT3C9osGFD", 0)
+            self.wallet = DAVE_ACCOUNT_WALLET
             self.account = self.wallet.classic_address
         if name == "elsa":
-            self.wallet = Wallet("sEdTeiqmPdUob32gyD6vPUskq1Z7TP3", 0)
-            self.account = self.wallet.classic_addressff
-
-        # raise KeyError('invalid account')
+            self.wallet = ELSA_ACCOUNT_WALLET
+            self.account = self.wallet.classic_address
+        if name == "frank":
+            self.wallet = FRANK_ACCOUNT_WALLET
+            self.account = self.wallet.classic_address
+        if name == "grace":
+            self.wallet = GRACE_ACCOUNT_WALLET
+            self.account = self.wallet.classic_address
+        if name == "heidi":
+            self.wallet = HEIDI_ACCOUNT_WALLET
+            self.account = self.wallet.classic_address
+        if name == "ivan":
+            self.wallet = IVAN_ACCOUNT_WALLET
+            self.account = self.wallet.classic_address
+        if name == "judy":
+            self.wallet = JUDY_ACCOUNT_WALLET
+            self.account = self.wallet.classic_address
+        if name == "hook1":
+            self.wallet = HOOK1_ACCOUNT_WALLET
+            self.account = self.wallet.classic_address
+        if name == "hook2":
+            self.wallet = HOOK2_ACCOUNT_WALLET
+            self.account = self.wallet.classic_address
+        if name == "hook3":
+            self.wallet = HOOK3_ACCOUNT_WALLET
+            self.account = self.wallet.classic_address
+        if name == "hook4":
+            self.wallet = HOOK4_ACCOUNT_WALLET
+            self.account = self.wallet.classic_address
+        if name == "hook5":
+            self.wallet = HOOK5_ACCOUNT_WALLET
+            self.account = self.wallet.classic_address
 
 
 class ICXRP:

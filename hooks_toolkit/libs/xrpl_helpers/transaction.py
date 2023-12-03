@@ -54,7 +54,14 @@ def app_transaction(
     delay_ms: int = 0,
 ) -> Response:
     if os.environ.get("RIPPLED_ENV", "standalone") == "standalone":
-        return test_transaction(client, transaction, wallet, hard_fail, count, delay_ms)
+        return test_transaction(
+            client, 
+            transaction, 
+            wallet, 
+            hard_fail, 
+            count, 
+            delay_ms
+        )
     raise ValueError("unimplemented")
     # return sign_and_reliable_submission(transaction, wallet, client)
 
