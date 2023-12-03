@@ -1,13 +1,13 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-from typing import List
+from typing import List, Dict, Any
 
 from xrpl.clients.sync_client import SyncClient
 from xrpl.wallet import Wallet
 from xrpl.models.transactions import SetHook
 from xrpl.models.transactions.set_hook import Hook
-from xrpl.utils import calculate_hook_on, hex_hook_parameters
+from xrpl.utils import calculate_hook_on
 from xrpl.models.transactions import SetHookFlag
 
 # from xrpl.models import HookParameter, HookGrant
@@ -16,40 +16,37 @@ from hooks_toolkit.libs.xrpl_helpers.transaction import (
     app_transaction,
 )
 from hooks_toolkit.utils import hex_namespace, read_hook_binary_hex_from_ns
+from hooks_toolkit.types import SetHookParams
+
 
 
 def create_hook_payload(
-    version: int = None,
-    create_file: str = None,
-    namespace: str = None,
-    flags: List[SetHookFlag] = [],
-    hook_on_array: str = None,
-    hook_params: List[str] = None,
-    hook_grants: List[str] = None,
+    params: SetHookParams,
 ) -> Hook:
-    return Hook(
-        hook_api_version=version,
-        create_code=read_hook_binary_hex_from_ns(create_file),
-        hook_namespace=hex_namespace(namespace),
-        flags=flags,
-        hook_on=calculate_hook_on(hook_on_array),
-    )
-    # if version is not None:
-    #     hook.hook_api_version = version
-    # if create_file is not None:
-    #     hook.create_code = read_hook_binary_hex_from_ns(create_file)
-    # if namespace is not None:
-    #     hook.hook_namespace = hex_namespace(namespace)
-    # if flags != 0:
-    #     hook.flags = flags
-    # if hook_on_array is not None:
-    #     hook.hook_on = calculate_hook_on(hook_on_array)
-    # if hook_params is not None:
-    #     hook.hook_parameters = hex_hook_parameters(hook_params)
-    # if hook_grants is not None:
-    #     hook.hook_grants = hook_grants
-    # # DA: validate
-    # return hook
+    kwargs: Dict[str, Any] = {
+        "hook_api_version": params.version,
+        "hook_namespace": hex_namespace(params.namespace),
+    }
+    
+    if params.create_file is not None:
+        kwargs['create_code'] = read_hook_binary_hex_from_ns(params.create_file)
+    
+    if params.hook_on_array is not None:
+        kwargs['hook_on'] = calculate_hook_on(params.hook_on_array)
+    
+    if params.hook_hash is not None:
+        kwargs["hook_hash"] = params.hook_hash
+
+    if params.flags is not None:
+        kwargs["flags"] = params.flags
+
+    if params.hook_parameters is not None:
+        kwargs["hook_parameters"] = params.hook_parameters
+
+    if params.hook_grants is not None:
+        kwargs["hook_grants"] = params.hook_grants
+
+    return Hook(**kwargs)
 
 
 def set_hooks_v3(client: SyncClient, seed: str, hooks: List[Hook]):
@@ -64,10 +61,32 @@ def set_hooks_v3(client: SyncClient, seed: str, hooks: List[Hook]):
         fee=get_transaction_fee(client, _tx),
     )
 
-    print("1. Transaction to submit (before autofill):")
-    print(tx.to_xrpl())
-    print("\n2. Submitting transaction...")
+    # print("1. Transaction to submit (before autofill):")
+    # print(tx.to_xrpl())
+    # print("\n2. Submitting transaction...")
 
     app_transaction(client, tx, HOOK_ACCOUNT, hard_fail=True, count=2, delay_ms=1000)
 
-    print("\n3. SetHook Success...")
+    # print("\n3. SetHook Success...")
+
+
+def clear_all_hooks_v3(client: SyncClient, seed: str):
+    HOOK_ACCOUNT = Wallet(seed, 0)
+    hook = Hook(**{ 'create_code': '', 'flags': [SetHookFlag.HSF_OVERRIDE, SetHookFlag.HSF_NS_DELETE] })
+    _tx = SetHook(
+        account=HOOK_ACCOUNT.classic_address,
+        hooks=[hook, hook, hook, hook, hook, hook, hook, hook, hook, hook],
+    )
+    tx = SetHook(
+        account=HOOK_ACCOUNT.classic_address,
+        hooks=[hook, hook, hook, hook, hook, hook, hook, hook, hook, hook],
+        fee=get_transaction_fee(client, _tx),
+    )
+
+    # print("1. Transaction to submit (before autofill):")
+    # print(tx.to_xrpl())
+    # print("\n2. Submitting transaction...")
+
+    app_transaction(client, tx, HOOK_ACCOUNT, hard_fail=True, count=2, delay_ms=1000)
+
+    # print("\n3. SetHook Success...")

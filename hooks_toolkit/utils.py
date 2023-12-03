@@ -154,13 +154,13 @@ def int_to_hex(integer, byte_length):
     return hex_string
 
 
-def read_hook_binary_hex_from_ns(filename):
+def read_hook_binary_hex_from_ns(filename: str):
     with open(f"build/{filename}.wasm", "rb") as file:
         wasm = file.read()
     return wasm.hex().upper()
 
 
-def hex_namespace(hook_namespace_seed):
+def hex_namespace(hook_namespace_seed: str):
     return hashlib.sha256(hook_namespace_seed.encode()).hexdigest().upper()
 
 
