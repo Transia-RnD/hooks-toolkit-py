@@ -30,13 +30,13 @@ class TestBase(IntegrationTestCase):
         teardown_client(cls.context)
         return super().tearDown()
     
-    def test_base(cls):
+    def test_hook_on_tt(cls):
         with cls.context.client as _:
             hook = create_hook_payload(
                 SetHookParams(
                     version=0,
-                    namespace="base",
-                    create_file="base",
+                    namespace="hook_on_tt",
+                    create_file="hook_on_tt",
                     flags=[SetHookFlag.HSF_OVERRIDE],
                     hook_on_array=['Invoke']
                 )
@@ -61,5 +61,5 @@ class TestBase(IntegrationTestCase):
             )
 
             cls.assertEqual(
-                hook_executions.executions[0].HookReturnString, "base: Finished."
+                hook_executions.executions[0].HookReturnString, "hook_on_tt: Finished."
             )
