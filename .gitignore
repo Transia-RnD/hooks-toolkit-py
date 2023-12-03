@@ -72,5 +72,8 @@ tmp/
 
 build/
 
-# XRPLD-CLI
+# XRPLD-NET_GEN
 xrpld/
+xahau/
+xrpl/
+playground.py
