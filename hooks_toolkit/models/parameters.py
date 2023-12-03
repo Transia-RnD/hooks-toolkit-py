@@ -42,10 +42,10 @@ class iHookParamEntry:
 
     def to_xrpl(self):
         return HookParameter(
-            HookParameterName=self.name.to_hex()
+            hook_parameter_name=self.name.to_hex()
             if not self.name.is_hex
             else self.name.value,
-            HookParameterValue=self.value.to_hex()
+            hook_parameter_value=self.value.to_hex()
             if not self.value.is_hex
             else self.value.value,
         )
