@@ -25,7 +25,7 @@ class TestMockClient(IntegrationTestCase):
                     create_file="base",
                     namespace="base",
                     flags=[SetHookFlag.HSF_OVERRIDE],
-                    hook_on_array=["Payment"]
+                    hook_on_array=["Payment"],
                 )
             )
 
@@ -59,7 +59,7 @@ class TestMockClient(IntegrationTestCase):
                     hook_hash="A5663784D04ED1B4408C6B97193464D27C9C3334AAF8BBB4FA5EB8E557FC4A2C",
                     namespace="base",
                     flags=[SetHookFlag.HSF_OVERRIDE],
-                    hook_on_array=["Payment"]
+                    hook_on_array=["Payment"],
                 )
             )
 
@@ -119,7 +119,7 @@ class TestMockClient(IntegrationTestCase):
 
     def test_set_hook_delete(cls):
         with cls.context.client as _:
-            hook = Hook(**{ "create_code": "", "flags": [SetHookFlag.HSF_OVERRIDE] })
+            hook = Hook(**{"create_code": "", "flags": [SetHookFlag.HSF_OVERRIDE]})
 
             set_hooks_v3(cls.context.client, cls.context.hook1.seed, [hook])
 
@@ -135,10 +135,7 @@ class TestMockClient(IntegrationTestCase):
     def test_set_hook_delete_ns(cls):
         with cls.context.client as _:
             hook = create_hook_payload(
-                SetHookParams(
-                    namespace="base",
-                    flags=[SetHookFlag.HSF_NS_DELETE]
-                )
+                SetHookParams(namespace="base", flags=[SetHookFlag.HSF_NS_DELETE])
             )
 
             set_hooks_v3(cls.context.client, cls.context.hook2.seed, [hook])
