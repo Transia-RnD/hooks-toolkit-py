@@ -1,9 +1,10 @@
 #!/usr/bin/env python
 # coding: utf-8
 
+import os
 from typing import Dict
 from xrpl.clients import WebsocketClient
-from xrpl.wallet import Wallet
+from xrpl.wallet import Wallet, generate_faucet_wallet
 from xrpl.ledger import get_network_id
 
 from hooks_toolkit.libs.xrpl_helpers.constants import (
@@ -82,14 +83,30 @@ def teardown_client(context: XrplIntegrationTestContext) -> None:
     return context.client.close()
 
 
-def setup_client(server: str, native_amount: int = 20000, ic_limit: int = 100000, ic_amount: int = 50000) -> XrplIntegrationTestContext:
+def setup_client(
+    server: str,
+    native_amount: int = 20000,
+    ic_limit: int = 100000,
+    ic_amount: int = 50000,
+) -> XrplIntegrationTestContext:
     currency = "USD"
-
     with WebsocketClient(server) as client:
+        RIPPLED_ENV = os.environ.get("RIPPLED_ENV", "standalone")
+        MASTER_NETWORK_WALLET: Wallet = MASTER_ACCOUNT_WALLET
+        if RIPPLED_ENV == "testnet" or RIPPLED_ENV == "mainnet":
+            # MASTER_NETWORK_WALLET: Wallet = generate_faucet_wallet(
+            #     client,
+            #     MASTER_NETWORK_WALLET,
+            #     False,
+            #     "https://xahau-test.net/accounts",
+            # )
+            MASTER_NETWORK_WALLET: Wallet = Wallet("snSMyFp9vzqD2trMLhtETtdXVGsG8", 0)
+            native_amount: int = 200
+
         context = XrplIntegrationTestContext(
             client=client,
             notactive=NOT_ACTIVE_WALLET,
-            master=MASTER_ACCOUNT_WALLET,
+            master=MASTER_NETWORK_WALLET,
             gw=GW_ACCOUNT_WALLET,
             ic=IC.gw(currency, GW_ACCOUNT_WALLET.classic_address),
             alice=ALICE_ACCOUNT_WALLET,
@@ -110,11 +127,11 @@ def setup_client(server: str, native_amount: int = 20000, ic_limit: int = 100000
         )
         context.client.network_id = get_network_id(client)
         fund_system(
-            context.client, 
-            context.master, 
+            context.client,
+            context.master,
             context.ic,
-            native_amount, 
-            ic_limit, 
-            ic_amount
+            native_amount,
+            ic_limit,
+            ic_amount,
         )
         return context

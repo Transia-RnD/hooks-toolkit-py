@@ -3,9 +3,14 @@
 
 import json
 import os
-from typing import Union
+from typing import Union, List
 
-from xrpl.transaction import sign_and_submit, autofill, send_reliable_submission
+from xrpl.transaction import (
+    sign_and_submit,
+    autofill,
+    safe_sign_and_autofill_transaction,
+    send_reliable_submission,
+)
 from xrpl.clients.sync_client import SyncClient
 from xrpl.models import GenericRequest, Response, Transaction
 from xrpl.wallet import Wallet
@@ -45,6 +50,9 @@ def get_transaction_fee(client: SyncClient, transaction: Transaction):
     return result
 
 
+envs: List[str] = ["production", "testnet", "mainnet"]
+
+
 def app_transaction(
     client: SyncClient,
     transaction: Transaction,
@@ -53,17 +61,16 @@ def app_transaction(
     count: int = 0,
     delay_ms: int = 0,
 ) -> Response:
-    if os.environ.get("RIPPLED_ENV", "standalone") == "standalone":
-        return test_transaction(
-            client, 
-            transaction, 
-            wallet, 
-            hard_fail, 
-            count, 
-            delay_ms
+    if os.environ.get("RIPPLED_ENV") == "standalone":
+        return test_transaction(client, transaction, wallet, hard_fail, count, delay_ms)
+
+    if os.environ.get("RIPPLED_ENV") in envs:
+        tx: Transaction = safe_sign_and_autofill_transaction(
+            transaction, wallet, client, check_fee=True
         )
+        return send_reliable_submission(tx, client)
+
     raise ValueError("unimplemented")
-    # return sign_and_reliable_submission(transaction, wallet, client)
 
 
 def test_transaction(

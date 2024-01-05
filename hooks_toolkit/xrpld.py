@@ -17,7 +17,7 @@ class Xrpld:
             client,
             params.tx,
             params.wallet,
-            hard_fail=False,
+            hard_fail=True,
             count=1,
             delay_ms=1000,
         )
