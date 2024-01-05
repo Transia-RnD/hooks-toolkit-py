@@ -75,5 +75,4 @@ build/
 # XRPLD-NET_GEN
 xrpld/
 xahau/
-xrpl/
 playground.py
