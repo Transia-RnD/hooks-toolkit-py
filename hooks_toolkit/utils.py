@@ -86,9 +86,8 @@ def to_string(xfl):
     return (
         ("-" if is_negative(xfl) else "+")
         + str(get_mantissa(xfl))
-        + " * 10^("
+        + "E"
         + str(get_exponent(xfl))
-        + ")"
     )
 
 
@@ -116,6 +115,7 @@ def float_to_be_xfl(fl):
 
 def float_to_le_xfl(fl):
     xfl = float_to_xfl(fl)
+    print(xfl)
     return flip_be_le(xfl)
 
 
