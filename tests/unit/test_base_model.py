@@ -5,8 +5,8 @@ from hooks_toolkit.libs.binary_models import BaseModel, XRPAddress
 
 class SampleModel(BaseModel):
     def __init__(self, owner: XRPAddress = None):
-        super().__init__()
         self.owner = owner
+        super().__init__()
 
     @staticmethod
     def get_metadata():
