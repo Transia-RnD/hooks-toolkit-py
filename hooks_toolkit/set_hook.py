@@ -81,3 +81,17 @@ def clear_all_hooks_v3(client: SyncClient, seed: str):
     )
 
     app_transaction(client, tx, HOOK_ACCOUNT, hard_fail=True, count=2, delay_ms=1000)
+
+
+def clear_hook_state_v3(client: SyncClient, seed: str, hooks: List[Hook]):
+    HOOK_ACCOUNT = Wallet(seed, 0)
+    _tx = SetHook(
+        account=HOOK_ACCOUNT.classic_address,
+        hooks=hooks,
+    )
+    tx = SetHook(
+        account=HOOK_ACCOUNT.classic_address,
+        hooks=hooks,
+        fee=get_transaction_fee(client, _tx),
+    )
+    app_transaction(client, tx, HOOK_ACCOUNT, hard_fail=True, count=2, delay_ms=1000)

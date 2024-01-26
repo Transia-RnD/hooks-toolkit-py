@@ -5,7 +5,7 @@ from xrpl.models.requests.ledger_entry import Hook, HookDefinition, HookState
 
 class StateUtility:
     @staticmethod
-    async def get_hook(client: WebsocketClient, account: str) -> Hook:
+    def get_hook(client: WebsocketClient, account: str) -> Hook:
         if not client.is_open():
             raise Exception("xrpl Client is not connected")
         hook_req = LedgerEntry(
@@ -13,32 +13,32 @@ class StateUtility:
                 "account": account,
             },
         )
-        hook_res = await client.request(hook_req)
+        hook_res = client.request(hook_req)
         return hook_res.result["node"]
 
     @staticmethod
-    async def get_hook_definition(client: WebsocketClient, hash: str) -> HookDefinition:
+    def get_hook_definition(client: WebsocketClient, hash: str) -> HookDefinition:
         if not client.is_open():
             raise Exception("xrpl Client is not connected")
         hook_def_request = LedgerEntry(
             hook_definition=hash,
         )
-        hook_def_res = await client.request(hook_def_request)
+        hook_def_res = client.request(hook_def_request)
         return hook_def_res.result["node"]
 
     @staticmethod
-    async def get_hook_state_dir(client: WebsocketClient, account: str, namespace: str):
+    def get_hook_state_dir(client: WebsocketClient, account: str, namespace: str):
         if not client.is_open():
             raise Exception("xrpl Client is not connected")
         request = {
             "account": account,
             "namespace_id": namespace,
         }
-        response = await client.request(request)
+        response = client.request(request)
         return response.result["namespace_entries"]
 
     @staticmethod
-    async def get_hook_state(
+    def get_hook_state(
         client: WebsocketClient, account: str, key: str, namespace: str
     ) -> HookState:
         if not client.is_open():
@@ -50,5 +50,5 @@ class StateUtility:
                 "namespace_id": namespace,
             },
         )
-        hook_state_resp = await client.request(hook_state_req)
+        hook_state_resp = client.request(hook_state_req)
         return hook_state_resp.result["node"]

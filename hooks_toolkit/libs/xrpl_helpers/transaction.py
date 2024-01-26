@@ -103,7 +103,5 @@ def test_transaction(
             "engine_result_message"
         ]
 
-    # signed_tx = omit(response.result.tx_json, "hash")
     client.request(LEDGER_ACCEPT_REQUEST)
-    # return verify_submitted_transaction(client, response.result["hash"])
     return verify_submitted_transaction(client, response.result["tx_json"]["hash"])
