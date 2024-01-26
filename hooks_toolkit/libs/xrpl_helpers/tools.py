@@ -13,7 +13,6 @@ from hooks_toolkit.libs.xrpl_helpers.transaction import app_transaction
 
 from hooks_toolkit.libs.xrpl_helpers.constants import (
     NOT_ACTIVE_WALLET,
-    MASTER_ACCOUNT_WALLET,
     GW_ACCOUNT_WALLET,
     ALICE_ACCOUNT_WALLET,
     BOB_ACCOUNT_WALLET,

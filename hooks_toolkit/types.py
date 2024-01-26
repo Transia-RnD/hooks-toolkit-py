@@ -5,13 +5,10 @@ import dataclasses
 from typing import List, Optional
 
 from xrpl.models.transactions import (
-    Transaction, 
+    Transaction,
     SetHookFlag,
 )
-from xrpl.models.transactions.set_hook import (
-    HookParameter, 
-    HookGrant
-)
+from xrpl.models.transactions.set_hook import HookParameter, HookGrant
 from xrpl.wallet import Wallet
 
 
@@ -19,6 +16,7 @@ from xrpl.wallet import Wallet
 class SmartContractParams:
     wallet: Wallet
     tx: Transaction
+
 
 @dataclasses.dataclass
 class SetHookParams:

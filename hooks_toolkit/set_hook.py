@@ -10,14 +10,12 @@ from xrpl.models.transactions.set_hook import Hook
 from xrpl.utils import calculate_hook_on
 from xrpl.models.transactions import SetHookFlag
 
-# from xrpl.models import HookParameter, HookGrant
 from hooks_toolkit.libs.xrpl_helpers.transaction import (
     get_transaction_fee,
     app_transaction,
 )
 from hooks_toolkit.utils import hex_namespace, read_hook_binary_hex_from_ns
 from hooks_toolkit.types import SetHookParams
-
 
 
 def create_hook_payload(
@@ -27,13 +25,13 @@ def create_hook_payload(
         "hook_api_version": params.version,
         "hook_namespace": hex_namespace(params.namespace),
     }
-    
+
     if params.create_file is not None:
-        kwargs['create_code'] = read_hook_binary_hex_from_ns(params.create_file)
-    
+        kwargs["create_code"] = read_hook_binary_hex_from_ns(params.create_file)
+
     if params.hook_on_array is not None:
-        kwargs['hook_on'] = calculate_hook_on(params.hook_on_array)
-    
+        kwargs["hook_on"] = calculate_hook_on(params.hook_on_array)
+
     if params.hook_hash is not None:
         kwargs["hook_hash"] = params.hook_hash
 
@@ -61,18 +59,17 @@ def set_hooks_v3(client: SyncClient, seed: str, hooks: List[Hook]):
         fee=get_transaction_fee(client, _tx),
     )
 
-    # print("1. Transaction to submit (before autofill):")
-    # print(tx.to_xrpl())
-    # print("\n2. Submitting transaction...")
-
     app_transaction(client, tx, HOOK_ACCOUNT, hard_fail=True, count=2, delay_ms=1000)
-
-    # print("\n3. SetHook Success...")
 
 
 def clear_all_hooks_v3(client: SyncClient, seed: str):
     HOOK_ACCOUNT = Wallet(seed, 0)
-    hook = Hook(**{ 'create_code': '', 'flags': [SetHookFlag.HSF_OVERRIDE, SetHookFlag.HSF_NS_DELETE] })
+    hook = Hook(
+        **{
+            "create_code": "",
+            "flags": [SetHookFlag.HSF_OVERRIDE, SetHookFlag.HSF_NS_DELETE],
+        }
+    )
     _tx = SetHook(
         account=HOOK_ACCOUNT.classic_address,
         hooks=[hook, hook, hook, hook, hook, hook, hook, hook, hook, hook],
@@ -83,10 +80,4 @@ def clear_all_hooks_v3(client: SyncClient, seed: str):
         fee=get_transaction_fee(client, _tx),
     )
 
-    # print("1. Transaction to submit (before autofill):")
-    # print(tx.to_xrpl())
-    # print("\n2. Submitting transaction...")
-
     app_transaction(client, tx, HOOK_ACCOUNT, hard_fail=True, count=2, delay_ms=1000)
-
-    # print("\n3. SetHook Success...")

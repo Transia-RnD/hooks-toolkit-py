@@ -4,8 +4,6 @@
 from typing import List
 
 from xrpl.clients import WebsocketClient
-from xrpl.models.transactions import Transaction
-from xrpl.models.requests import Tx
 from xrpl.models import TransactionMetadata
 from xrpl.models.transactions.metadata import HookExecution, HookExecutionFields
 

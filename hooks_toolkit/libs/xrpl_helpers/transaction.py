@@ -89,7 +89,11 @@ def test_transaction(
 
     if response.result["engine_result"] != "tesSUCCESS":
         print(
-            f"Transaction was not successful. Expected response.result.engine_result to be tesSUCCESS but got {response.result['engine_result']}"
+            (
+                f"Transaction was not successful. "
+                f"Expected response.result.engine_result to be tesSUCCESS "
+                f"but got {response.result['engine_result']}"
+            )
         )
         print("The transaction was: ", transaction)
         print("The response was: ", json.dumps(response.result))
@@ -103,56 +107,3 @@ def test_transaction(
     client.request(LEDGER_ACCEPT_REQUEST)
     # return verify_submitted_transaction(client, response.result["hash"])
     return verify_submitted_transaction(client, response.result["tx_json"]["hash"])
-
-
-# export async function prod_transaction(
-#   client: Client,
-#   transaction: Transaction,
-#   wallet: Wallet,
-#   retry?: {
-#     hardFail: boolean | true
-#     count: number
-#     delayMs: number
-#   }
-# ): Promise<TxResponse> {
-#   // sign/submit the transaction
-#   const response = await client.submit(transaction, {
-#     autofill: true,
-#     wallet: wallet,
-#   })
-
-#   console.log(response.result.engine_result)
-
-#   // check that the transaction was successful
-#   assert.equal(response.type, 'response')
-
-#   // check that the transaction was successful
-#   assert.equal(response.type, 'response')
-
-#   if (response.result.engine_result !== 'tesSUCCESS') {
-#     // eslint-disable-next-line no-console -- See output
-#     console.error(
-#       `Transaction was not successful. Expected response.result.engine_result to be tesSUCCESS but got ${response.result.engine_result}`
-#     )
-#     // eslint-disable-next-line no-console -- See output
-#     console.error('The transaction was: ', transaction)
-#     // eslint-disable-next-line no-console -- See output
-#     console.error('The response was: ', JSON.stringify(response))
-#   }
-
-#   if (retry?.hardFail) {
-#     assert.equal(
-#       response.result.engine_result,
-#       'tesSUCCESS',
-#       response.result.engine_result_message
-#     )
-#   }
-
-#   // check that the transaction is on the ledger
-#   return await verifySubmittedTransaction(
-#     client,
-#     '',
-#     response.result.tx_json.hash as string
-#   )
-#   // return response
-# }

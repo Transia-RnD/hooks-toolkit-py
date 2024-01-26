@@ -1,23 +1,12 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-from typing import List, Type, Union
+from typing import List, Type
 
 from hooks_toolkit.libs.binary_models.utils import (
     encode_field,
     decode_field,
     length_to_hex,
-)
-
-from hooks_toolkit.libs.binary_models.utils.types import (
-    UInt8,
-    UInt32,
-    UInt64,
-    UInt224,
-    VarString,
-    XFL,
-    Currency,
-    XRPAddress,
 )
 
 
@@ -72,7 +61,10 @@ class BaseModel:
                 length += cls.get_hex_length(field_model_class)
             elif field_type == "varModelArray":
                 raise ValueError(
-                    "varModelArray hex length doesn't need to be computed for this application; only its model elements only do. However, this will fail if getHexLength is called on a model that contains a varModelArray. Will need to be updated if this is ever needed."
+                    "varModelArray hex length doesn't need to be computed for this"
+                    "application; only its model elements only do. However, this will"
+                    "fail if getHexLength is called on a model that contains a "
+                    "varModelArray. Will need to be updated if this is ever needed."
                 )
             else:
                 raise ValueError(f"Unknown type: {field_type}")
@@ -221,7 +213,9 @@ def encode_model(model: BaseModel) -> str:
                 raise ValueError("maxArrayLength is required for type varModelArray")
             if len(field_value) > max_array_length:
                 raise ValueError(
-                    f"{field} varModelArray length {len(field_value)} exceeds maxArrayLength {max_array_length} for model {type(field_value[0]).__name__}"
+                    f"{field} varModelArray length {len(field_value)} exceeds"
+                    f"maxArrayLength {max_array_length} for model"
+                    f"{type(field_value[0]).__name__}"
                 )
             length_hex = length_to_hex(len(field_value), 256)  # 1-byte max length
             encoded_field = length_hex

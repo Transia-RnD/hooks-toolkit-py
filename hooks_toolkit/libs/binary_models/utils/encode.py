@@ -2,7 +2,7 @@
 # coding: utf-8
 
 import binascii
-from typing import List, Union, Any
+from typing import Any
 
 from xrpl.utils import str_to_hex
 from xrpl.core.addresscodec import decode_classic_address

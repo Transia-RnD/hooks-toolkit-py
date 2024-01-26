@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-from typing import Any, Dict
+from typing import Any
 from xrpl.clients import Client
 
 from hooks_toolkit.libs.xrpl_helpers.transaction import app_transaction

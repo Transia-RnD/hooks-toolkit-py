@@ -163,39 +163,6 @@ def hex_namespace(hook_namespace_seed: str):
     return hashlib.sha256(hook_namespace_seed.encode()).hexdigest().upper()
 
 
-def format_blob(add_accts=None, remove_accts=None):
-    add_accts = add_accts or []
-    remove_accts = remove_accts or []
-    blob = ""
-    for entry in add_accts:
-        blob += "00"
-        blob += AccountID.from_(entry).to_hex()
-    for entry in remove_accts:
-        blob += "01"
-        blob += AccountID.from_(entry).to_hex()
-    return blob
-
-
-def gen_hash(account, amount, tag=None):
-    padded_length = 73
-    dest_bytes = decode_account_id(account)
-    amount_bytes = amount.to_bytes()
-
-    data_bytes = (
-        dest_bytes
-        + bytes([0x01 if tag else 0x00])
-        + struct.pack(">I", tag or 0)[:4]
-        + amount_bytes
-    )
-
-    if len(data_bytes) < padded_length:
-        padding = bytes(padded_length - len(data_bytes))
-        data_bytes += padding
-
-    hash_ = hashlib.sha512(data_bytes).digest()
-    return hash_[:32].hex().upper()
-
-
 def generate_hash(data_bytes: bytes):
     hash_ = hashlib.sha512(data_bytes).digest()
     return hash_[:32].hex().upper()

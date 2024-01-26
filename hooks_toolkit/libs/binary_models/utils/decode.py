@@ -1,5 +1,7 @@
-import struct
-from typing import Any, Dict, List, Type, Union
+#!/usr/bin/env python
+# coding: utf-8
+
+from typing import Any
 
 from xrpl.utils import hex_to_str
 from xrpl.core.addresscodec import encode_classic_address

@@ -2,9 +2,8 @@
 # coding: utf-8
 
 import os
-from typing import Dict
 from xrpl.clients import WebsocketClient
-from xrpl.wallet import Wallet, generate_faucet_wallet
+from xrpl.wallet import Wallet
 from xrpl.ledger import get_network_id
 
 from hooks_toolkit.libs.xrpl_helpers.constants import (
