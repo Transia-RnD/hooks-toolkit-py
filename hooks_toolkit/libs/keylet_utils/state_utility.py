@@ -2,8 +2,6 @@ from xrpl.clients import WebsocketClient
 from xrpl.models.requests import LedgerEntry
 from xrpl.models.requests.ledger_entry import Hook, HookDefinition, HookState
 
-from hooks_toolkit.utils import hex_namespace
-
 
 class StateUtility:
     @staticmethod
@@ -34,7 +32,7 @@ class StateUtility:
             raise Exception("xrpl Client is not connected")
         request = {
             "account": account,
-            "namespace_id": hex_namespace(namespace),
+            "namespace_id": namespace,
         }
         response = await client.request(request)
         return response.result["namespace_entries"]
@@ -49,7 +47,7 @@ class StateUtility:
             hook_state={
                 "account": account,
                 "key": key,
-                "namespace_id": hex_namespace(namespace),
+                "namespace_id": namespace,
             },
         )
         hook_state_resp = await client.request(hook_state_req)
