@@ -29,7 +29,7 @@ class TestBase(IntegrationTestCase):
             clear_all_hooks_v3(cls.context.client, cls.context.hook1.seed)
         teardown_client(cls.context)
         return super().tearDown()
-    
+
     def test_hook_on_tt(cls):
         with cls.context.client as _:
             hook = create_hook_payload(
@@ -38,7 +38,7 @@ class TestBase(IntegrationTestCase):
                     namespace="hook_on_tt",
                     create_file="hook_on_tt",
                     flags=[SetHookFlag.HSF_OVERRIDE],
-                    hook_on_array=['Invoke']
+                    hook_on_array=["Invoke"],
                 )
             )
 
