@@ -115,7 +115,6 @@ def float_to_be_xfl(fl):
 
 def float_to_le_xfl(fl):
     xfl = float_to_xfl(fl)
-    print(xfl)
     return flip_be_le(xfl)
 
 
@@ -193,6 +192,11 @@ def gen_hash(account, amount, tag=None):
         padding = bytes(padded_length - len(data_bytes))
         data_bytes += padding
 
+    hash_ = hashlib.sha512(data_bytes).digest()
+    return hash_[:32].hex().upper()
+
+
+def generate_hash(data_bytes: bytes):
     hash_ = hashlib.sha512(data_bytes).digest()
     return hash_[:32].hex().upper()
 
