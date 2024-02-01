@@ -10,5 +10,5 @@ python-dotenv = "^1.0.0"
 transia-xrpl-py = "^1.7.0a6"
 
 [tool.poetry.dev-dependencies]
-pytest = "^7.4.0"
+pytest = "^8.0.0"
 flake8 = "^3.8.4"
