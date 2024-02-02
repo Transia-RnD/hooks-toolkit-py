@@ -14,7 +14,7 @@ from hooks_toolkit.libs.xrpl_helpers.setup import (
 from hooks_toolkit.xrpld import Xrpld
 from hooks_toolkit.set_hook import set_hooks_v3, clear_all_hooks_v3
 from hooks_toolkit.types import SmartContractParams, SetHookParams
-from hooks_toolkit.libs.keylet_utils.execution_utils import ExecutionUtility
+from hooks_toolkit.libs.keylet_utils.execution_utility import ExecutionUtility
 
 
 class TestBase(IntegrationTestCase):
@@ -29,7 +29,7 @@ class TestBase(IntegrationTestCase):
             clear_all_hooks_v3(cls.context.client, cls.context.hook1.seed)
         teardown_client(cls.context)
         return super().tearDown()
-    
+
     def test_base(cls):
         with cls.context.client as _:
             hook = create_hook_payload(
@@ -38,7 +38,7 @@ class TestBase(IntegrationTestCase):
                     namespace="base",
                     create_file="base",
                     flags=[SetHookFlag.HSF_OVERRIDE],
-                    hook_on_array=['Invoke']
+                    hook_on_array=["Invoke"],
                 )
             )
 

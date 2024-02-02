@@ -20,7 +20,7 @@ from hooks_toolkit.models.parameters import (
     iHookParamValue,
 )
 from hooks_toolkit.utils import float_to_le_xfl
-from hooks_toolkit.libs.keylet_utils.execution_utils import ExecutionUtility
+from hooks_toolkit.libs.keylet_utils.execution_utility import ExecutionUtility
 
 
 class TestBase(TestCase):
