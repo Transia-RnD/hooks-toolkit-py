@@ -13,7 +13,7 @@ from hooks_toolkit.libs.asyncio.keylet_utils.execution_utility import ExecutionU
 
 
 class TestExecutionUtility(AsyncioIntegrationTestCase):
-    async def async_test_executions_from_meta(cls):
+    async def test_async_executions_from_meta(cls):
         async with cls.context.client as _:
             hook = create_hook_payload(
                 SetHookParams(
@@ -60,7 +60,7 @@ class TestExecutionUtility(AsyncioIntegrationTestCase):
                 cls.context.client, cls.context.hook1.seed, [clear_hook]
             )
 
-    async def async_test_executions_from_tx_hash(cls):
+    async def test_async_executions_from_tx_hash(cls):
         async with cls.context.client as _:
             hook = create_hook_payload(
                 SetHookParams(
@@ -107,7 +107,7 @@ class TestExecutionUtility(AsyncioIntegrationTestCase):
                 cls.context.client, cls.context.hook1.seed, [clear_hook]
             )
 
-    async def async_test_emissions_from_meta(cls):
+    async def test_async_emissions_from_meta(cls):
         async with cls.context.client as _:
             hook = create_hook_payload(
                 SetHookParams(

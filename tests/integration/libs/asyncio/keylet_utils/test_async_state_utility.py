@@ -15,7 +15,7 @@ from hooks_toolkit.libs.binary_models import xrp_address_to_hex, hex_to_uint64
 
 
 class TestStateUtility(AsyncioIntegrationTestCase):
-    async def async_test_get_hook(cls):
+    async def test_async_get_hook(cls):
         async with cls.context.client as _:
             hook = create_hook_payload(
                 SetHookParams(
@@ -60,7 +60,7 @@ class TestStateUtility(AsyncioIntegrationTestCase):
                 cls.context.client, cls.context.hook1.seed, [clear_hook]
             )
 
-    async def async_test_get_hook_definition(cls):
+    async def test_async_get_hook_definition(cls):
         async with cls.context.client as _:
             hook = create_hook_payload(
                 SetHookParams(
@@ -105,7 +105,7 @@ class TestStateUtility(AsyncioIntegrationTestCase):
                 cls.context.client, cls.context.hook1.seed, [clear_hook]
             )
 
-    async def async_test_hook_state_dir(cls):
+    async def test_async_hook_state_dir(cls):
         async with cls.context.client as _:
             hook = create_hook_payload(
                 SetHookParams(
@@ -150,7 +150,7 @@ class TestStateUtility(AsyncioIntegrationTestCase):
                 cls.context.client, cls.context.hook1.seed, [clear_hook]
             )
 
-    async def async_test_hook_state(cls):
+    async def test_async_hook_state(cls):
         async with cls.context.client as _:
             hook = create_hook_payload(
                 SetHookParams(
