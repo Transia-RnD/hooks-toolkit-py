@@ -19,7 +19,7 @@ from hooks_toolkit.utils import hex_namespace, pad_hex_string, flip_hex
 from hooks_toolkit.libs.binary_models import xrp_address_to_hex, hex_to_uint64
 
 
-class TestMockClient(IntegrationTestCase):
+class TestSetupHook(IntegrationTestCase):
     def test_set_hook_create(cls):
         with cls.context.client as _:
             hook = create_hook_payload(
