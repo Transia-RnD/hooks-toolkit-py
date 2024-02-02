@@ -25,8 +25,6 @@ from hooks_toolkit.utils import flip_hex, to_string
 def decode_field(
     field_value: Any, field_type: str, max_string_length: int = None
 ) -> str:
-    print(field_type)
-    print(field_type == "uint8")
     if field_type == "uint8":
         return hex_to_uint8(field_value)
     elif field_type == "uint32":
