@@ -57,7 +57,7 @@ class TestBase(IntegrationTestCase):
             )
 
             hook_executions = ExecutionUtility.get_hook_executions_from_meta(
-                cls.context.client, result["meta"]
+                result["meta"]
             )
 
             cls.assertEqual(

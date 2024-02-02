@@ -39,9 +39,7 @@ def main():
 
     result = Xrpld.submit(context.client, SmartContractParams(alice_wallet, built_tx))
 
-    hook_executions = ExecutionUtility.get_hook_executions_from_meta(
-        context.client, result["meta"]
-    )
+    hook_executions = ExecutionUtility.get_hook_executions_from_meta(result["meta"])
 
     print(hook_executions.executions[0].HookReturnString)
 

@@ -370,13 +370,13 @@ files = [
 
 [[package]]
 name = "transia-xrpl-py"
-version = "1.7.0a6"
+version = "1.7.0a7"
 description = "A complete Python library for interacting with the XRP ledger"
 optional = false
 python-versions = ">=3.7,<4.0"
 files = [
-    {file = "transia_xrpl_py-1.7.0a6-py3-none-any.whl", hash = "sha256:17209b360b320fded3b2b26d28a7e303294479c333ff487c87505ce89169969e"},
-    {file = "transia_xrpl_py-1.7.0a6.tar.gz", hash = "sha256:a8bc566f6c2c1e3c2a8947a672c5313542d51f412e5931cd6941cd1f6fb0c151"},
+    {file = "transia_xrpl_py-1.7.0a7-py3-none-any.whl", hash = "sha256:87576b8730078f7b94bddf32a90b0719ca8807171f775113fbfc1cd1aebb469f"},
+    {file = "transia_xrpl_py-1.7.0a7.tar.gz", hash = "sha256:5e37e8a273a46e70ded671f11cb37a09ed703955012fbc68e040090a1e8bb6b2"},
 ]
 
 [package.dependencies]

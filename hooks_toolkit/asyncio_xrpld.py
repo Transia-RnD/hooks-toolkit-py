@@ -25,7 +25,6 @@ class Xrpld:
         tx_result = tx_response.result.get("meta")["TransactionResult"]
         if tx_result == "tecHOOK_REJECTED":
             hook_executions = ExecutionUtility.get_hook_executions_from_meta(
-                client,
                 tx_response.result.get("meta"),
             )
             raise ValueError(hook_executions.executions[0].HookReturnString)
