@@ -1,6 +1,7 @@
 from xrpl.clients import WebsocketClient
 from xrpl.models.requests import LedgerEntry
 from xrpl.models.requests.ledger_entry import Hook, HookDefinition, HookState
+from xrpl.models.requests.account_namespace import AccountNamespace
 
 
 class StateUtility:
@@ -30,11 +31,9 @@ class StateUtility:
     def get_hook_state_dir(client: WebsocketClient, account: str, namespace: str):
         if not client.is_open():
             raise Exception("xrpl Client is not connected")
-        request = {
-            "account": account,
-            "namespace_id": namespace,
-        }
-        response = client.request(request)
+        response = client.request(
+            AccountNamespace(account=account, namespace_id=namespace)
+        )
         return response.result["namespace_entries"]
 
     @staticmethod
