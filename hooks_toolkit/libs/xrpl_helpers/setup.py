@@ -90,9 +90,9 @@ def setup_client(
 ) -> XrplIntegrationTestContext:
     currency = "USD"
     with WebsocketClient(server) as client:
-        RIPPLED_ENV = os.environ.get("RIPPLED_ENV", "standalone")
+        XAHAUD_ENV = os.environ.get("XAHAUD_ENV", "standalone")
         MASTER_NETWORK_WALLET: Wallet = MASTER_ACCOUNT_WALLET
-        if RIPPLED_ENV == "testnet" or RIPPLED_ENV == "mainnet":
+        if XAHAUD_ENV == "testnet" or XAHAUD_ENV == "mainnet":
             # MASTER_NETWORK_WALLET: Wallet = generate_faucet_wallet(
             #     client,
             #     MASTER_NETWORK_WALLET,

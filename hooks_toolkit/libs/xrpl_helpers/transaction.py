@@ -61,10 +61,10 @@ def app_transaction(
     count: int = 0,
     delay_ms: int = 0,
 ) -> Response:
-    if os.environ.get("RIPPLED_ENV") == "standalone":
+    if os.environ.get("XAHAUD_ENV") == "standalone":
         return test_transaction(client, transaction, wallet, hard_fail, count, delay_ms)
 
-    if os.environ.get("RIPPLED_ENV") in envs:
+    if os.environ.get("XAHAUD_ENV") in envs:
         tx: Transaction = safe_sign_and_autofill_transaction(
             transaction, wallet, client, check_fee=True
         )
