@@ -1,3 +1,8 @@
+## [1.0.3] - 2024-03-13
+
+### Updated:
+- xrpl-py: 1.7.0a8 -> 1.7.0a11
+
 ## [1.0.2] - 2024-03-11
 ### Changed:
 - Env Var: RIPPLED_ENV -> XAHAUD_ENV
