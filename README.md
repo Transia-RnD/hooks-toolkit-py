@@ -2,7 +2,7 @@
 
 ## Global Prerequsits
 
-`$ npm i -g c2wasm-cli xrpld-cli`
+`$ npm i -g c2wasm-cli`
 
 ## Compile Hooks
 
@@ -35,11 +35,11 @@ Before you can run the integration tests you must have a standalone rippled serv
 
 - Full env with explorer:
 
-- - `$ xrpld-cli up: standalone`
+- - `$ xrpld-netgen up:standalone`
 
 - Docker standalone only:
 
-- - `$ docker run -p 5005:5005 -p 6006:6006 -it gcr.io/thelab-924f3/dangell7-hooksv3d-standalone:latest`
+- - `$ docker run -p 5005:5005 -p 6006:6006 -it transia/xahaud:latest`
 
 Run Integration tests
 
