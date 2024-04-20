@@ -181,8 +181,25 @@ def decode_model(hex_str: str, model_class: Type[BaseModel]) -> BaseModel:
             field_hex = hex_str[hex_index : hex_index + model_hex_length]
             decoded_field = decode_model(field_hex, field_model_class)
             hex_index += model_hex_length
-        elif field_type == "varModel":
-            raise ValueError(f"Unknown type: {field_type}")
+        elif field_type == "varModelArray":
+            if field_model_class is None:
+                raise ValueError("modelClass is required for type varModelArray")
+
+            length_hex = hex_str[hex_index : hex_index + 2]
+            var_model_array_length = int(length_hex, 16)  # Convert hex to integer
+            hex_index += 2
+
+            model_array = []
+            for _ in range(var_model_array_length):
+                model_hex_length = BaseModel.get_hex_length(field_model_class)
+                field_hex = hex_str[hex_index : hex_index + model_hex_length]
+                decoded_var_model_array_element = decode_model(
+                    field_hex, field_model_class
+                )
+                model_array.append(decoded_var_model_array_element)
+                hex_index += model_hex_length
+
+            decoded_field = model_array
         else:
             raise ValueError(f"Unknown type: {field_type}")
 

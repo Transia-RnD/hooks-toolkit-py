@@ -18,7 +18,10 @@ from hooks_toolkit.libs.binary_models import (
     PublicKey,
     VarString,
     UInt64,
+    encode_model,
 )
+
+from typing import List
 
 
 class TestDecodeUInt8(TestCase):
@@ -302,4 +305,148 @@ class TestDecodeModel(TestCase):
         self.assertEqual(
             sampl_model_decoded.goal,
             goal,
+        )
+
+    def test_nested_model_array(self):
+        class NestedModel(BaseModel):
+            def __init__(
+                self,
+                mode_flag: UInt8 = None,
+                owner: XRPAddress = None,
+                title: VarString = None,
+                goal: UInt64 = None,
+            ):
+                super().__init__()
+                self.mode_flag = mode_flag
+                self.owner = owner
+                self.title = title
+                self.goal = goal
+
+            @staticmethod
+            def get_metadata():
+                return [
+                    {"field": "mode_flag", "type": "uint8"},
+                    {"field": "owner", "type": "xrpAddress"},
+                    {
+                        "field": "title",
+                        "type": "varString",
+                        "maxStringLength": 75,
+                    },
+                    {"field": "goal", "type": "uint64"},
+                ]
+
+        class SimpleModel(BaseModel):
+            def __init__(
+                self,
+                mode_flag: UInt8 = None,
+                mode_flag_64: UInt64 = None,
+                nested: NestedModel = None,
+            ):
+                super().__init__()
+                self.mode_flag = mode_flag
+                self.mode_flag_64 = mode_flag_64
+                self.nested = nested
+
+            @staticmethod
+            def get_metadata():
+                return [
+                    {"field": "mode_flag", "type": "uint8"},
+                    {"field": "mode_flag_64", "type": "uint64"},
+                    {"field": "nested", "type": "model", "modelClass": NestedModel},
+                ]
+
+        class SampleModel(BaseModel):
+            def __init__(
+                self,
+                mode_flag: UInt8 = None,
+                nested_array: List[SimpleModel] = None,
+            ):
+                super().__init__()
+                self.mode_flag = mode_flag
+                self.nested_array = nested_array
+
+            @staticmethod
+            def get_metadata():
+                return [
+                    {"field": "mode_flag", "type": "uint8"},
+                    {
+                        "field": "nested_array",
+                        "type": "varModelArray",
+                        "modelClass": SimpleModel,
+                        "maxArrayLength": 5,
+                    },
+                ]
+
+        model1 = NestedModel(
+            1,
+            "rHb9CJAWyB4rj91VRWn96DkukG4bwdtyTh",
+            "nested model 1",
+            1000000000,
+        )
+        model2 = NestedModel(
+            2,
+            "rHb9CJAWyB4rj91VRWn96DkukG4bwdtyTh",
+            "nested model 2",
+            43245323,
+        )
+
+        nested_models = [SimpleModel(1, 1, model1), SimpleModel(2, 1, model2)]
+        nested_array_model = SampleModel(1, nested_models)
+
+        hex = encode_model(nested_array_model)
+        print(hex)
+
+        self.assertEqual(
+            hex,
+            "010201000000000000000101B5F762798A53D543A014CAF8B297CFF8F2F937E80E6E6573746564206D6F64656C203100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000003B9ACA0002000000000000000102B5F762798A53D543A014CAF8B297CFF8F2F937E80E6E6573746564206D6F64656C203200000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000293DF0B",
+        )
+
+        decoded: SampleModel = decode_model(hex, SampleModel)
+        self.assertEqual(
+            decoded.mode_flag,
+            1,
+        )
+        self.assertEqual(
+            len(decoded.nested_array),
+            2,
+        )
+        self.assertEqual(
+            decoded.nested_array[0].mode_flag,
+            1,
+        )
+        self.assertEqual(
+            decoded.nested_array[0].mode_flag_64,
+            1,
+        )
+        self.assertEqual(
+            decoded.nested_array[0].nested.mode_flag,
+            1,
+        )
+        self.assertEqual(
+            decoded.nested_array[0].nested.goal,
+            1000000000,
+        )
+        self.assertEqual(
+            decoded.nested_array[0].nested.owner,
+            "rHb9CJAWyB4rj91VRWn96DkukG4bwdtyTh",
+        )
+        self.assertEqual(
+            decoded.nested_array[0].nested.title,
+            "nested model 1",
+        )
+        self.assertEqual(
+            decoded.nested_array[1].nested.mode_flag,
+            2,
+        )
+        self.assertEqual(
+            decoded.nested_array[1].nested.goal,
+            43245323,
+        )
+        self.assertEqual(
+            decoded.nested_array[1].nested.owner,
+            "rHb9CJAWyB4rj91VRWn96DkukG4bwdtyTh",
+        )
+        self.assertEqual(
+            decoded.nested_array[1].nested.title,
+            "nested model 2",
         )
