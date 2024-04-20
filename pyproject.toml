@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "hooks-toolkit"
-version = "1.0.3"
+version = "1.0.4"
 description = ""
 authors = ["Denis Angell <denis@transia.co>"]
 
