@@ -153,8 +153,14 @@ def int_to_hex(integer, byte_length):
     return hex_string
 
 
-def read_hook_binary_hex_from_ns(filename: str):
-    with open(f"build/{filename}.wasm", "rb") as file:
+def read_hook_binary_hex_from_ns(filename: str, ext: str):
+    with open(f"build/{filename}.{ext}", "rb") as file:
+        wasm = file.read()
+    return wasm.hex().upper()
+
+
+def read_jshook_binary_hex_from_ns(filename: str):
+    with open(f"build/{filename}.bc", "rb") as file:
         wasm = file.read()
     return wasm.hex().upper()
 

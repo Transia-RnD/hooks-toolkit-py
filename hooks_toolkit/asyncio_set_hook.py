@@ -27,7 +27,14 @@ def create_hook_payload(
     }
 
     if params.create_file is not None:
-        kwargs["create_code"] = read_hook_binary_hex_from_ns(params.create_file)
+        if params.version == 0:
+            kwargs["create_code"] = read_hook_binary_hex_from_ns(
+                params.create_file, "wasm"
+            )
+        elif params.version == 1:
+            kwargs["create_code"] = read_hook_binary_hex_from_ns(
+                params.create_file, "bc"
+            )
 
     if params.hook_on_array is not None:
         kwargs["hook_on"] = calculate_hook_on(params.hook_on_array)
