@@ -6,7 +6,7 @@ from hooks_toolkit.set_hook import create_hook_payload
 from xahau.models.transactions import SetHookFlag, Invoke
 from xahau.models.transactions.set_hook import Hook
 
-from hooks_toolkit.xrpld import Xrpld
+from hooks_toolkit.xahaud import Xrpld
 from hooks_toolkit.set_hook import set_hooks_v3, clear_hook_state_v3
 from hooks_toolkit.types import SmartContractParams, SetHookParams
 from hooks_toolkit.libs.keylet_utils.execution_utility import ExecutionUtility
@@ -34,7 +34,7 @@ class TestExecutionUtility(IntegrationTestCase):
                 account=hook_wallet.classic_address,
             )
 
-            response = Xrpld.submit(
+            response = Xahaud.submit(
                 cls.context.client, SmartContractParams(hook_wallet, built_tx)
             )
             executions = ExecutionUtility.get_hook_executions_from_meta(
@@ -81,7 +81,7 @@ class TestExecutionUtility(IntegrationTestCase):
                 account=hook_wallet.classic_address,
             )
 
-            response = Xrpld.submit(
+            response = Xahaud.submit(
                 cls.context.client, SmartContractParams(hook_wallet, built_tx)
             )
             print(response["hash"])
@@ -129,7 +129,7 @@ class TestExecutionUtility(IntegrationTestCase):
                 account=hook_wallet.classic_address,
             )
 
-            response = Xrpld.submit(
+            response = Xahaud.submit(
                 cls.context.client, SmartContractParams(hook_wallet, built_tx)
             )
             emissions = ExecutionUtility.get_hook_emitted_txs_from_meta(

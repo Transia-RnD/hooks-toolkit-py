@@ -2,14 +2,14 @@
 # coding: utf-8
 
 from hooks_toolkit.set_hook import create_hook_payload
-from xrpl.models.transactions import SetHookFlag, Invoke
+from xahau.models.transactions import SetHookFlag, Invoke
 
-from hooks_toolkit.libs.xrpl_helpers.server_url import server_url
-from hooks_toolkit.libs.xrpl_helpers.setup import (
+from hooks_toolkit.libs.xahau_helpers.server_url import server_url
+from hooks_toolkit.libs.xahau_helpers.setup import (
     setup_client,
     teardown_client,
 )
-from hooks_toolkit.xrpld import Xrpld
+from hooks_toolkit.xahaud import Xrpld
 from hooks_toolkit.set_hook import set_hooks_v3
 from hooks_toolkit.types import SmartContractParams, SetHookParams
 from hooks_toolkit.libs.keylet_utils.execution_utility import ExecutionUtility
@@ -37,7 +37,7 @@ def main():
         destination=hook_wallet.classic_address,
     )
 
-    result = Xrpld.submit(context.client, SmartContractParams(alice_wallet, built_tx))
+    result = Xahaud.submit(context.client, SmartContractParams(alice_wallet, built_tx))
 
     hook_executions = ExecutionUtility.get_hook_executions_from_meta(result["meta"])
 

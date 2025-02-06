@@ -5,7 +5,7 @@ import os
 from xahau.asyncio.clients import AsyncWebsocketClient
 from xahau.wallet import Wallet
 
-from hooks_toolkit.libs.xrpl_helpers.constants import (
+from hooks_toolkit.libs.xahau_helpers.constants import (
     NOT_ACTIVE_WALLET,
     MASTER_ACCOUNT_WALLET,
     GW_ACCOUNT_WALLET,
@@ -26,10 +26,10 @@ from hooks_toolkit.libs.xrpl_helpers.constants import (
     HOOK5_ACCOUNT_WALLET,
 )
 from hooks_toolkit.libs.asyncio.xrpl_helpers.fund_system import fund_system
-from hooks_toolkit.libs.xrpl_helpers.tools import IC
+from hooks_toolkit.libs.xahau_helpers.tools import IC
 
 
-class XrplIntegrationTestContext:
+class XahauIntegrationTestContext:
     def __init__(
         self,
         client: AsyncWebsocketClient,
@@ -75,7 +75,7 @@ class XrplIntegrationTestContext:
         self.hook5 = hook5
 
 
-async def teardown_client(context: XrplIntegrationTestContext) -> None:
+async def teardown_client(context: XahauIntegrationTestContext) -> None:
     if not context or not context.client:
         return
     return await context.client.close()
@@ -86,7 +86,7 @@ async def setup_client(
     native_amount: int = 20000,
     ic_limit: int = 100000,
     ic_amount: int = 50000,
-) -> XrplIntegrationTestContext:
+) -> XahauIntegrationTestContext:
     currency = "USD"
     async with AsyncWebsocketClient(server) as client:
         XAHAUD_ENV = os.environ.get("XAHAUD_ENV", "standalone")
@@ -98,10 +98,12 @@ async def setup_client(
             #     False,
             #     "https://xahau-test.net/accounts",
             # )
-            MASTER_NETWORK_WALLET: Wallet = Wallet("snSMyFp9vzqD2trMLhtETtdXVGsG8", 0)
+            MASTER_NETWORK_WALLET: Wallet = Wallet.from_seed(
+                "snSMyFp9vzqD2trMLhtETtdXVGsG8", algorithm="secp256k1"
+            )
             native_amount: int = 200
 
-        context = XrplIntegrationTestContext(
+        context = XahauIntegrationTestContext(
             client=client,
             notactive=NOT_ACTIVE_WALLET,
             master=MASTER_NETWORK_WALLET,

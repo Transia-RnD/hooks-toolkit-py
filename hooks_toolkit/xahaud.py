@@ -4,12 +4,12 @@
 from typing import Any
 from xahau.clients import Client
 
-from hooks_toolkit.libs.xrpl_helpers.transaction import app_transaction
+from hooks_toolkit.libs.xahau_helpers.transaction import app_transaction
 from hooks_toolkit.types import SmartContractParams
 from hooks_toolkit.libs.keylet_utils import ExecutionUtility
 
 
-class Xrpld:
+class Xahaud:
     @staticmethod
     def submit(client: Client, params: SmartContractParams) -> Any:
         # validate(built_tx)

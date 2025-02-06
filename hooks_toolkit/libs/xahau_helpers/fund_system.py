@@ -7,7 +7,7 @@ from xahau.clients import Client
 from xahau.wallet import Wallet
 from xahau.models.amounts import IssuedCurrencyAmount
 
-from hooks_toolkit.libs.xrpl_helpers.tools import (
+from hooks_toolkit.libs.xahau_helpers.tools import (
     Account,
     ICXRP,
     balance,

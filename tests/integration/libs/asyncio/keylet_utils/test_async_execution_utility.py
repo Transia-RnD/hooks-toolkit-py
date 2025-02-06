@@ -32,7 +32,7 @@ class TestExecutionUtility(AsyncioIntegrationTestCase):
                 account=hook_wallet.classic_address,
             )
 
-            response = await Xrpld.submit(
+            response = await Xahaud.submit(
                 cls.context.client, SmartContractParams(hook_wallet, built_tx)
             )
             executions = await ExecutionUtility.get_hook_executions_from_meta(
@@ -79,7 +79,7 @@ class TestExecutionUtility(AsyncioIntegrationTestCase):
                 account=hook_wallet.classic_address,
             )
 
-            response = await Xrpld.submit(
+            response = await Xahaud.submit(
                 cls.context.client, SmartContractParams(hook_wallet, built_tx)
             )
             executions = await ExecutionUtility.get_hook_executions_from_tx(
@@ -126,7 +126,7 @@ class TestExecutionUtility(AsyncioIntegrationTestCase):
                 account=hook_wallet.classic_address,
             )
 
-            response = await Xrpld.submit(
+            response = await Xahaud.submit(
                 cls.context.client, SmartContractParams(hook_wallet, built_tx)
             )
             emissions = await ExecutionUtility.get_hook_emitted_txs_from_meta(

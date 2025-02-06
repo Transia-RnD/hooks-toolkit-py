@@ -11,7 +11,7 @@ from xahau.models.requests.ledger_entry import (
     Hook as LeHook,
 )
 
-from hooks_toolkit.xrpld import Xrpld
+from hooks_toolkit.xahaud import Xrpld
 from hooks_toolkit.set_hook import set_hooks_v3, clear_hook_state_v3
 from hooks_toolkit.types import SmartContractParams, SetHookParams
 from hooks_toolkit.libs.keylet_utils.state_utility import StateUtility
@@ -198,7 +198,9 @@ class TestSetupHook(IntegrationTestCase):
                 account=hook_wallet.classic_address,
             )
 
-            Xrpld.submit(cls.context.client, SmartContractParams(hook_wallet, built_tx))
+            Xahaud.submit(
+                cls.context.client, SmartContractParams(hook_wallet, built_tx)
+            )
 
             hook_state = StateUtility.get_hook_state(
                 cls.context.client,

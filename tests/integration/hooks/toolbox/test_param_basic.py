@@ -5,13 +5,13 @@ from unittest import TestCase
 from hooks_toolkit.set_hook import create_hook_payload
 from xahau.models.transactions import SetHookFlag, Payment
 
-from hooks_toolkit.libs.xrpl_helpers.server_url import server_url
-from hooks_toolkit.libs.xrpl_helpers.setup import (
+from hooks_toolkit.libs.xahau_helpers.server_url import server_url
+from hooks_toolkit.libs.xahau_helpers.setup import (
     setup_client,
-    XrplIntegrationTestContext,
+    XahauIntegrationTestContext,
     teardown_client,
 )
-from hooks_toolkit.xrpld import Xrpld
+from hooks_toolkit.xahaud import Xrpld
 from hooks_toolkit.set_hook import set_hooks_v3, clear_all_hooks_v3
 from hooks_toolkit.types import SmartContractParams, SetHookParams
 from hooks_toolkit.models.parameters import (
@@ -24,7 +24,7 @@ from hooks_toolkit.libs.keylet_utils.execution_utility import ExecutionUtility
 
 
 class TestBase(TestCase):
-    context: XrplIntegrationTestContext
+    context: XahauIntegrationTestContext
 
     def setUp(cls) -> None:
         cls.context = setup_client(server_url)
@@ -68,7 +68,7 @@ class TestBase(TestCase):
                 hook_parameters=[otxn_param1.to_xrpl()],
             )
 
-            result = Xrpld.submit(
+            result = Xahaud.submit(
                 cls.context.client, SmartContractParams(alice_wallet, built_tx)
             )
 

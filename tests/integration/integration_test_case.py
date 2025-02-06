@@ -3,16 +3,16 @@
 
 from unittest import TestCase
 
-from hooks_toolkit.libs.xrpl_helpers.server_url import server_url
-from hooks_toolkit.libs.xrpl_helpers.setup import (
+from hooks_toolkit.libs.xahau_helpers.server_url import server_url
+from hooks_toolkit.libs.xahau_helpers.setup import (
     setup_client,
-    XrplIntegrationTestContext,
+    XahauIntegrationTestContext,
     teardown_client,
 )
 
 
 class IntegrationTestCase(TestCase):
-    context: XrplIntegrationTestContext
+    context: XahauIntegrationTestContext
 
     @classmethod
     def setUpClass(cls):

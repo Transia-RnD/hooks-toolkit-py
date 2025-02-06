@@ -10,7 +10,7 @@ from xahau.models.transactions.set_hook import Hook
 from xahau.utils import calculate_hook_on
 from xahau.models.transactions import SetHookFlag
 
-from hooks_toolkit.libs.xrpl_helpers.transaction import (
+from hooks_toolkit.libs.xahau_helpers.transaction import (
     get_transaction_fee,
     app_transaction,
 )

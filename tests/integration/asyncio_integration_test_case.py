@@ -4,15 +4,15 @@
 import asyncio
 from unittest import IsolatedAsyncioTestCase
 
-from hooks_toolkit.libs.xrpl_helpers.server_url import server_url
-from hooks_toolkit.libs.xrpl_helpers.setup import (
-    XrplIntegrationTestContext,
+from hooks_toolkit.libs.xahau_helpers.server_url import server_url
+from hooks_toolkit.libs.xahau_helpers.setup import (
+    XahauIntegrationTestContext,
 )
 from hooks_toolkit.libs.asyncio.xrpl_helpers.setup import setup_client, teardown_client
 
 
 class AsyncioIntegrationTestCase(IsolatedAsyncioTestCase):
-    context: XrplIntegrationTestContext
+    context: XahauIntegrationTestContext
 
     @classmethod
     async def asyncSetUpClass(cls):

@@ -11,7 +11,7 @@ from xahau.models.transactions import Payment, TrustSet, AccountSet, AccountSetF
 from xahau.utils import str_to_hex, xah_to_drops
 
 from hooks_toolkit.libs.asyncio.xrpl_helpers.transaction import app_transaction
-from hooks_toolkit.libs.xrpl_helpers.constants import (
+from hooks_toolkit.libs.xahau_helpers.constants import (
     NOT_ACTIVE_WALLET,
     GW_ACCOUNT_WALLET,
     ALICE_ACCOUNT_WALLET,
