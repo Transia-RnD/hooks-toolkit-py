@@ -125,6 +125,9 @@ jobs:
         run: |
           # Add commands to run integration tests here
           poetry run python3 test.py tests/integration
+        env:
+          HOOKS_COMPILE_HOST: https://hook-buildbox.xrpl.org
+          XAHAU_ENV: standalone
 
       - name: Stop docker container
         if: always()

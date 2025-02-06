@@ -76,3 +76,4 @@ build/
 xrpld/
 xahau/
 playground.py
+.env
