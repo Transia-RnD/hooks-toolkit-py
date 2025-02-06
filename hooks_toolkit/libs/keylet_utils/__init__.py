@@ -1,3 +1,6 @@
+#!/usr/bin/env python
+# coding: utf-8
+
 from hooks_toolkit.libs.keylet_utils.execution_utility import (
     ExecutionUtility,
 )

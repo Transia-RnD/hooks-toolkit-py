@@ -4,12 +4,12 @@
 import dataclasses
 from typing import List, Optional
 
-from xrpl.models.transactions import (
+from xahau.models.transactions import (
     Transaction,
     SetHookFlag,
 )
-from xrpl.models.transactions.set_hook import HookParameter, HookGrant
-from xrpl.wallet import Wallet
+from xahau.models.transactions.set_hook import HookParameter, HookGrant
+from xahau.wallet import Wallet
 
 
 @dataclasses.dataclass

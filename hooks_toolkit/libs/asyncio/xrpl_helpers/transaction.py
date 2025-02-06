@@ -5,18 +5,18 @@ import json
 import os
 from typing import Union, List
 
-from xrpl.asyncio.transaction import (
+from xahau.asyncio.transaction import (
     sign_and_submit,
     autofill,
-    safe_sign_and_autofill_transaction,
-    send_reliable_submission,
+    autofill_and_sign,
+    submit_and_wait,
 )
-from xrpl.asyncio.clients import AsyncWebsocketClient
-from xrpl.models import GenericRequest, Response, Transaction
-from xrpl.wallet import Wallet
-from xrpl.core.binarycodec import encode
-from xrpl.asyncio.ledger import get_fee_estimate
-from xrpl.models.requests import Tx
+from xahau.asyncio.clients import AsyncWebsocketClient
+from xahau.models import GenericRequest, Response, Transaction
+from xahau.wallet import Wallet
+from xahau.core.binarycodec import encode
+from xahau.asyncio.ledger import get_fee_estimate
+from xahau.models.requests import Tx
 
 LEDGER_ACCEPT_REQUEST = GenericRequest(method="ledger_accept")
 
@@ -67,10 +67,8 @@ async def app_transaction(
         )
 
     if os.environ.get("XAHAUD_ENV") in envs:
-        tx: Transaction = safe_sign_and_autofill_transaction(
-            transaction, wallet, client, check_fee=True
-        )
-        return await send_reliable_submission(tx, client)
+        tx: Transaction = autofill_and_sign(transaction, client, wallet, check_fee=True)
+        return await submit_and_wait(tx, client)
 
     raise ValueError("unimplemented")
 
@@ -85,7 +83,7 @@ async def test_transaction(
 ) -> Response:
     await client.request(LEDGER_ACCEPT_REQUEST)
 
-    response = await sign_and_submit(transaction, wallet, client, True, False)
+    response = await sign_and_submit(transaction, client, wallet, True, False)
 
     assert response.type == "response"
 

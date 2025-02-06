@@ -1,7 +1,10 @@
-from xrpl.clients import WebsocketClient
-from xrpl.models.requests import LedgerEntry
-from xrpl.models.requests.ledger_entry import Hook, HookDefinition, HookState
-from xrpl.models.requests.account_namespace import AccountNamespace
+#!/usr/bin/env python
+# coding: utf-8
+
+from xahau.clients import WebsocketClient
+from xahau.models.requests import LedgerEntry
+from xahau.models.requests.ledger_entry import Hook, HookDefinition, HookState
+from xahau.models.requests.account_namespace import AccountNamespace
 
 
 class StateUtility:

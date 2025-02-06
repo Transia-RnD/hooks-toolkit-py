@@ -3,9 +3,9 @@
 
 from typing import List
 
-from xrpl.clients import Client
-from xrpl.wallet import Wallet
-from xrpl.models.amounts import IssuedCurrencyAmount
+from xahau.clients import Client
+from xahau.wallet import Wallet
+from xahau.models.amounts import IssuedCurrencyAmount
 
 from hooks_toolkit.libs.xrpl_helpers.tools import (
     Account,

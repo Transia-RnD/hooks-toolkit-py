@@ -3,12 +3,12 @@
 
 from typing import Union, Dict, Any
 
-from xrpl.asyncio.clients import AsyncWebsocketClient
-from xrpl.wallet import Wallet
-from xrpl.models.amounts import IssuedCurrencyAmount
-from xrpl.models.requests import AccountInfo, LedgerEntry
-from xrpl.models.transactions import Payment, TrustSet, AccountSet, AccountSetFlag
-from xrpl.utils import str_to_hex, xrp_to_drops
+from xahau.asyncio.clients import AsyncWebsocketClient
+from xahau.wallet import Wallet
+from xahau.models.amounts import IssuedCurrencyAmount
+from xahau.models.requests import AccountInfo, LedgerEntry
+from xahau.models.transactions import Payment, TrustSet, AccountSet, AccountSetFlag
+from xahau.utils import str_to_hex, xah_to_drops
 
 from hooks_toolkit.libs.asyncio.xrpl_helpers.transaction import app_transaction
 from hooks_toolkit.libs.xrpl_helpers.constants import (
@@ -95,7 +95,7 @@ class ICXRP:
         self.issuer = None
         self.currency = "XRP"
         self.value = value
-        self.amount = xrp_to_drops(self.value)
+        self.amount = xah_to_drops(self.value)
 
 
 class IC:

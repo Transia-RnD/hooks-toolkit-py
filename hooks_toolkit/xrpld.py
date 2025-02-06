@@ -2,7 +2,7 @@
 # coding: utf-8
 
 from typing import Any
-from xrpl.clients import Client
+from xahau.clients import Client
 
 from hooks_toolkit.libs.xrpl_helpers.transaction import app_transaction
 from hooks_toolkit.types import SmartContractParams

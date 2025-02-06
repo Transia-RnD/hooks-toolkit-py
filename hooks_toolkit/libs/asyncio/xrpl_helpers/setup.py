@@ -2,9 +2,8 @@
 # coding: utf-8
 
 import os
-from xrpl.asyncio.clients import AsyncWebsocketClient
-from xrpl.wallet import Wallet
-from xrpl.asyncio.ledger import get_network_id
+from xahau.asyncio.clients import AsyncWebsocketClient
+from xahau.wallet import Wallet
 
 from hooks_toolkit.libs.xrpl_helpers.constants import (
     NOT_ACTIVE_WALLET,
@@ -124,7 +123,6 @@ async def setup_client(
             hook4=HOOK4_ACCOUNT_WALLET,
             hook5=HOOK5_ACCOUNT_WALLET,
         )
-        context.client.network_id = await get_network_id(client)
         await fund_system(
             context.client,
             context.master,

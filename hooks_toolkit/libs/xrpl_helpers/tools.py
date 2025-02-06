@@ -3,12 +3,12 @@
 
 from typing import Union, Dict, Any
 
-from xrpl.clients import Client
-from xrpl.wallet import Wallet
-from xrpl.models.amounts import IssuedCurrencyAmount
-from xrpl.models.requests import AccountInfo, LedgerEntry
-from xrpl.models.transactions import Payment, TrustSet, AccountSet, AccountSetFlag
-from xrpl.utils import str_to_hex, xrp_to_drops
+from xahau.clients import Client
+from xahau.wallet import Wallet
+from xahau.models.amounts import IssuedCurrencyAmount
+from xahau.models.requests import AccountInfo, LedgerEntry
+from xahau.models.transactions import Payment, TrustSet, AccountSet, AccountSetAsfFlag
+from xahau.utils import str_to_hex, xah_to_drops
 from hooks_toolkit.libs.xrpl_helpers.transaction import app_transaction
 
 from hooks_toolkit.libs.xrpl_helpers.constants import (
@@ -95,7 +95,7 @@ class ICXRP:
         self.issuer = None
         self.currency = "XRP"
         self.value = value
-        self.amount = xrp_to_drops(self.value)
+        self.amount = xah_to_drops(self.value)
 
 
 class IC:
@@ -239,7 +239,7 @@ def account_set(ctx: Client, account: Wallet) -> None:
         account=account.classic_address,
         transfer_rate=0,
         domain=str_to_hex("https://usd.transia.io"),
-        set_flag=AccountSetFlag.ASF_DEFAULT_RIPPLE,
+        set_flag=AccountSetAsfFlag.ASF_DEFAULT_RIPPLE,
     )
     app_transaction(
         ctx,

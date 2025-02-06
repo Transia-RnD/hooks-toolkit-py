@@ -3,12 +3,12 @@
 
 from typing import List, Dict, Any
 
-from xrpl.clients.sync_client import SyncClient
-from xrpl.wallet import Wallet
-from xrpl.models.transactions import SetHook
-from xrpl.models.transactions.set_hook import Hook
-from xrpl.utils import calculate_hook_on
-from xrpl.models.transactions import SetHookFlag
+from xahau.clients.sync_client import SyncClient
+from xahau.wallet import Wallet
+from xahau.models.transactions import SetHook
+from xahau.models.transactions.set_hook import Hook
+from xahau.utils import calculate_hook_on
+from xahau.models.transactions import SetHookFlag
 
 from hooks_toolkit.libs.asyncio.xrpl_helpers.transaction import (
     get_transaction_fee,
@@ -55,7 +55,7 @@ def create_hook_payload(
 
 
 async def set_hooks_v3(client: SyncClient, seed: str, hooks: List[Hook]):
-    HOOK_ACCOUNT = Wallet(seed, 0)
+    HOOK_ACCOUNT = Wallet.from_seed(seed)
     _tx = SetHook(
         account=HOOK_ACCOUNT.classic_address,
         hooks=hooks,
@@ -72,7 +72,7 @@ async def set_hooks_v3(client: SyncClient, seed: str, hooks: List[Hook]):
 
 
 async def clear_all_hooks_v3(client: SyncClient, seed: str):
-    HOOK_ACCOUNT = Wallet(seed, 0)
+    HOOK_ACCOUNT = Wallet.from_seed(seed)
     hook = Hook(
         **{
             "create_code": "",
@@ -95,7 +95,7 @@ async def clear_all_hooks_v3(client: SyncClient, seed: str):
 
 
 async def clear_hook_state_v3(client: SyncClient, seed: str, hooks: List[Hook]):
-    HOOK_ACCOUNT = Wallet(seed, 0)
+    HOOK_ACCOUNT = Wallet.from_seed(seed)
     _tx = SetHook(
         account=HOOK_ACCOUNT.classic_address,
         hooks=hooks,

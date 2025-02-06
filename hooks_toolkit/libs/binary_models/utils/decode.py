@@ -3,8 +3,8 @@
 
 from typing import Any
 
-from xrpl.utils import hex_to_str
-from xrpl.core.addresscodec import encode_classic_address
+from xahau.utils import hex_to_str
+from xahau.core.addresscodec import encode_classic_address
 
 from ..utils import length_to_hex
 from .types import (

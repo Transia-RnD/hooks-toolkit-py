@@ -3,11 +3,11 @@
 
 from tests.integration.integration_test_case import IntegrationTestCase
 from hooks_toolkit.set_hook import create_hook_payload
-from xrpl.models.transactions import SetHookFlag, Invoke
+from xahau.models.transactions import SetHookFlag, Invoke
 
-from xrpl.models.transactions.set_hook import Hook
-from xrpl.models.requests import LedgerEntry
-from xrpl.models.requests.ledger_entry import (
+from xahau.models.transactions.set_hook import Hook
+from xahau.models.requests import LedgerEntry
+from xahau.models.requests.ledger_entry import (
     Hook as LeHook,
 )
 

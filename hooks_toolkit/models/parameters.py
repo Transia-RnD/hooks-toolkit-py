@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-from xrpl.models.transactions.transaction import HookParameter
-from xrpl.utils.str_conversions import hex_to_str, str_to_hex
+from xahau.models.transactions.transaction import HookParameter
+from xahau.utils.str_conversions import hex_to_str, str_to_hex
 
 
 class iHookParamName:
@@ -42,12 +42,12 @@ class iHookParamEntry:
 
     def to_xrpl(self):
         return HookParameter(
-            hook_parameter_name=self.name.to_hex()
-            if not self.name.is_hex
-            else self.name.value,
-            hook_parameter_value=self.value.to_hex()
-            if not self.value.is_hex
-            else self.value.value,
+            hook_parameter_name=(
+                self.name.to_hex() if not self.name.is_hex else self.name.value
+            ),
+            hook_parameter_value=(
+                self.value.to_hex() if not self.value.is_hex else self.value.value
+            ),
         )
 
 

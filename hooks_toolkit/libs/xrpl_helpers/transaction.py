@@ -5,18 +5,18 @@ import json
 import os
 from typing import Union, List
 
-from xrpl.transaction import (
+from xahau.transaction import (
     sign_and_submit,
     autofill,
-    safe_sign_and_autofill_transaction,
-    send_reliable_submission,
+    autofill_and_sign,
+    submit_and_wait,
 )
-from xrpl.clients.sync_client import SyncClient
-from xrpl.models import GenericRequest, Response, Transaction
-from xrpl.wallet import Wallet
-from xrpl.core.binarycodec import encode
-from xrpl.ledger import get_fee_estimate
-from xrpl.models.requests import Tx
+from xahau.clients.sync_client import SyncClient
+from xahau.models import GenericRequest, Response, Transaction
+from xahau.wallet import Wallet
+from xahau.core.binarycodec import encode
+from xahau.ledger import get_fee_estimate
+from xahau.models.requests import Tx
 
 LEDGER_ACCEPT_REQUEST = GenericRequest(method="ledger_accept")
 
@@ -65,10 +65,10 @@ def app_transaction(
         return test_transaction(client, transaction, wallet, hard_fail, count, delay_ms)
 
     if os.environ.get("XAHAUD_ENV") in envs:
-        tx: Transaction = safe_sign_and_autofill_transaction(
-            transaction, wallet, client, check_fee=True
+        tx: Transaction = autofill_and_sign(
+            transaction, client, wallet, check_fee=False
         )
-        return send_reliable_submission(tx, client)
+        return submit_and_wait(tx, client)
 
     raise ValueError("unimplemented")
 
@@ -83,8 +83,7 @@ def test_transaction(
 ) -> Response:
     client.request(LEDGER_ACCEPT_REQUEST)
 
-    response = sign_and_submit(transaction, wallet, client, True, False)
-
+    response = sign_and_submit(transaction, client, wallet, True, False)
     assert response.type == "response"
 
     if response.result["engine_result"] != "tesSUCCESS":

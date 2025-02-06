@@ -4,8 +4,8 @@
 import binascii
 from typing import Any
 
-from xrpl.utils import str_to_hex
-from xrpl.core.addresscodec import decode_classic_address
+from xahau.utils import str_to_hex
+from xahau.core.addresscodec import decode_classic_address
 
 from hooks_toolkit.utils import float_to_le_xfl
 

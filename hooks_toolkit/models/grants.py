@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-from xrpl.models.transactions.set_hook import HookGrant
+from xahau.models.transactions.set_hook import HookGrant
 
 
 class HookGrantAuthorize:

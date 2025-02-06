@@ -3,16 +3,16 @@
 
 from typing import List
 
-from xrpl.clients import WebsocketClient
-from xrpl.models import TransactionMetadata
-from xrpl.models.transactions.metadata import (
+from xahau.clients import WebsocketClient
+from xahau.models import TransactionMetadata
+from xahau.models.transactions.metadata import (
     HookExecution,
     HookExecutionFields,
     HookEmission,
     HookEmissionFields,
 )
-from xrpl.models.requests import Tx
-from xrpl.utils.str_conversions import hex_to_str
+from xahau.models.requests import Tx
+from xahau.utils.str_conversions import hex_to_str
 
 
 class iHookExecution:

@@ -3,8 +3,8 @@
 
 from tests.integration.asyncio_integration_test_case import AsyncioIntegrationTestCase
 from hooks_toolkit.set_hook import create_hook_payload
-from xrpl.models.transactions import SetHookFlag, Invoke
-from xrpl.models.transactions.set_hook import Hook
+from xahau.models.transactions import SetHookFlag, Invoke
+from xahau.models.transactions.set_hook import Hook
 
 from hooks_toolkit.asyncio_xrpld import Xrpld
 from hooks_toolkit.asyncio_set_hook import set_hooks_v3, clear_hook_state_v3

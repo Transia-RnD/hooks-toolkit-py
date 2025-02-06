@@ -3,7 +3,7 @@
 
 from unittest import TestCase
 from hooks_toolkit.set_hook import create_hook_payload
-from xrpl.models.transactions import SetHookFlag, Payment
+from xahau.models.transactions import SetHookFlag, Payment
 
 from hooks_toolkit.libs.xrpl_helpers.server_url import server_url
 from hooks_toolkit.libs.xrpl_helpers.setup import (

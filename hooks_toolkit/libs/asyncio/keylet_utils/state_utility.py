@@ -1,7 +1,7 @@
-from xrpl.asyncio.clients import AsyncWebsocketClient
-from xrpl.models.requests import LedgerEntry
-from xrpl.models.requests.ledger_entry import Hook, HookDefinition, HookState
-from xrpl.models.requests.account_namespace import AccountNamespace
+from xahau.asyncio.clients import AsyncWebsocketClient
+from xahau.models.requests import LedgerEntry
+from xahau.models.requests.ledger_entry import Hook, HookDefinition, HookState
+from xahau.models.requests.account_namespace import AccountNamespace
 
 
 class StateUtility:

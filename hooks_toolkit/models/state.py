@@ -1,5 +1,8 @@
-from xrpl.models.requests.ledger_entry import HookState
-from xrpl.utils.str_conversions import hex_to_str, str_to_hex
+#!/usr/bin/env python
+# coding: utf-8
+
+from xahau.models.requests.ledger_entry import HookState
+from xahau.utils.str_conversions import hex_to_str, str_to_hex
 
 
 class iHookState:
