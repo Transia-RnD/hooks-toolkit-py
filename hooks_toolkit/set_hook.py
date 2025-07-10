@@ -54,6 +54,9 @@ def create_hook_payload(
     if params.hook_grants is not None:
         kwargs["hook_grants"] = params.hook_grants
 
+    if params.fee is not None:
+        kwargs["fee"] = params.fee
+
     return Hook(**kwargs)
 
 

@@ -28,3 +28,4 @@ class SetHookParams:
     hook_on_array: Optional[List[SetHookFlag]] = None
     hook_parameters: Optional[List[HookParameter]] = None
     hook_grants: Optional[List[HookGrant]] = None
+    fee: Optional[str] = None
